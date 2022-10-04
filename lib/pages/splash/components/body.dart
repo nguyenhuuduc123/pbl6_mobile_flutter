@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 
 
-import '../../components/default_button.dart';
-import '../../constants.dart';
-import '../../size_config.dart';
+import '../../../components/default_button.dart';
+import '../../../constants.dart';
+import '../../sign_in/sign_in_page.dart';
+import '../../../size_config.dart';
 import '../components/splash_content.dart';
 
 
 class Body extends StatefulWidget {
+  const Body({super.key});
+
   @override
   _BodyState createState() => _BodyState();
 }
@@ -79,7 +82,7 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                       controller.animateToPage(1, duration: const Duration(seconds : 1), curve: Curves.easeIn);
+                      Navigator.pushNamed(context, SignInpage.routeName);
                       },
                     ),
                     const Spacer(),

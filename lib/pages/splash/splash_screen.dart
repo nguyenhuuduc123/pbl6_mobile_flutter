@@ -1,9 +1,9 @@
 
 
-import 'package:booking/splash/components/body.dart';
+import 'package:booking/pages/splash/components/body.dart';
 import 'package:flutter/material.dart';
 
-import '../size_config.dart';
+import '../../size_config.dart';
 
 
 class SplashScreen extends StatelessWidget {
