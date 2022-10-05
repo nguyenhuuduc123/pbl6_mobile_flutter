@@ -21,6 +21,21 @@ class _SignFormState extends State<SignForm> {
   String? password;
   bool remember = false;
   final List<String> errors = [];
+
+
+  void addError(String error){
+    if(!errors.contains(error)){
+      setState(()=>
+      errors.add(error) );
+    }
+  }
+  void removeError(String error){
+    if(errors.contains(error)){
+      setState(()=>
+      errors.remove(error) );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -76,7 +91,7 @@ class _SignFormState extends State<SignForm> {
       obscureText: true,
       onSaved: (newPassword) => password = newPassword,
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kPassNullError)) {
+        if (value!.isEmpty ) {
           setState(() => {errors.add(kPassNullError)});
           return "";
         } else if (value.length < 8 && !errors.contains(kShortPassError)) {
@@ -86,9 +101,9 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
+        if (value.isNotEmpty) {
           setState(() => {errors.remove(kPassNullError)});
-        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
+        } else if (value.length >= 8 ) {
           setState(() => {errors.add(kShortPassError)});
           
         }
@@ -106,11 +121,10 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildEmailFromField() {
     return TextFormField(
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-          setState(() => {errors.remove(kEmailNullError)});
-        } else if (emailValidatorRegExp.hasMatch(value) &&
-            errors.contains(kInvalidEmailError)) {
-          setState(() => {errors.remove(kInvalidEmailError)});
+        if (value.isNotEmpty ) {
+         removeError(kEmailNullError);
+        } else if (emailValidatorRegExp.hasMatch(value)) {
+           removeError(kInvalidEmailError);
           
         }
       },
@@ -119,12 +133,11 @@ class _SignFormState extends State<SignForm> {
         email = newValue;
       },
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kEmailNullError)) {
-          setState(() => {errors.add(kEmailNullError)});
+        if (value!.isEmpty) {
+         addError(kEmailNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
-          setState(() => {errors.add(kInvalidEmailError)});
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
+          addError(kInvalidEmailError);
           return "";
         }
         return null;

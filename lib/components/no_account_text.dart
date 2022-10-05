@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../pages/forgot_password.dart/forgot_password_page.dart';
+import '../pages/sign_up/sign_up_page.dart';
 import '../size_config.dart';
 
 class NoAccountText extends StatelessWidget {
@@ -21,8 +22,8 @@ class NoAccountText extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap : (){
-              
+          onTap: () {
+            Navigator.pushNamed(context, SignUpPage.routeName);
           },
           child: Text(
             "Sign up",
